@@ -1,14 +1,15 @@
 const playlist = document.getElementById("playlist");
 const lecteur = document.querySelector("#lecteur");
+const btnPlayRandom = document.querySelector("#btnPlayRandom");
+
 const config = {
-    urlCover : "uploads/cover/",
+    urlCover : "uploads/covers/",
     urlSound : "uploads/musics/"
 };
 
 const getData = async () => {
     const req = await fetch("./assets/js/data.json");
     const dbMusics = await req.json();
-    console.log(dbMusics);
     dbMusics.forEach((music) => {
         playlist.innerHTML += `<li id="${music.id}"><h2>${music.title}</h2><img src="${config.urlCover}${music.cover}" alt="${music.title}"/><div><small>${music.category}</small></div></li>`;
     });
@@ -24,8 +25,16 @@ const getData = async () => {
             lecteur.play();
         })
     });
+
+    btnPlayRandom.addEventListener('click', function(){
+        const random = Math.floor(Math.random() * dbMusics.length) + 1;
+        const searchById = dbMusics.find((element) => element.id === random);
+        lecteur.src = `${config.urlSound}${searchById.sound}`;
+        lecteur.play();
+    });
 };
 getData();
+
 
 
 // fonction à mettre dans le onclick des li de la boucle foreach

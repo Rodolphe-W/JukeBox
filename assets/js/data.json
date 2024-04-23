@@ -1,23 +1,16 @@
 [
     {
         "id": 1,
-        "cover": "1.jpg",
-        "sound": "1.mp3",
-        "title": "Titre 1",
+        "cover": "lose_control_cover.jpg",
+        "sound": "Teddy_Swims-Lose_Control.mp3",
+        "title": "Lose Control",
         "category": "pop"
     },
     {
         "id": 2,
-        "cover": "2.jpg",
-        "sound": "2.mp3",
-        "title": "Titre 2",
-        "category": "pop"
-    },
-    {
-        "id": 3,
-        "cover": "3.jpg",
-        "sound": "3.mp3",
-        "title": "Titre 3",
+        "cover": "the_sound_of_silence_cover.jpg",
+        "sound": "Disturbed-The_Sound_Of_Silence.mp3",
+        "title": "The Sound of Silence",
         "category": "pop"
     }
 ]
