@@ -1,0 +1,93 @@
+body {
+    background: radial-gradient(circle, rgba(2,0,36,1) 0%, rgba(9,9,121,1) 35%, rgba(0,212,255,1) 100%);
+}
+
+.navbar-brand {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+/* Style personnalisé pour la liste de lecture */
+#playlist {
+    list-style-type: none; /* Supprime les puces */
+    padding: 0;
+}
+
+#playlist li {
+    margin-bottom: 20px;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+    display: flex; /* Utilisation de flexbox */
+    align-items: center; /* Centrer verticalement les éléments */
+}
+
+#playlist li .music-info {
+    flex-grow: 1; /* Faire en sorte que le texte occupe tout l'espace restant */
+}
+
+#playlist li img {
+    max-width: 80px; /* Taille de l'image réduite */
+    border-radius: 5px;
+    margin-left: 10px; /* Espace entre l'image et le texte */
+}
+
+.music-info h2 {
+    font-size: 24px;
+}
+
+.music-info p {
+    margin-bottom: 0;
+}
+
+@keyframes turn {
+    0%{
+        transform: rotate(0deg);
+    }
+    50%{
+        transform: rotate(180deg);
+    }
+    100%{
+        transform: rotate(360deg);
+    }
+}
+
+.disque-cover{
+    width: 80px;
+    height: 80px;
+    border-radius: 100%;
+    object-fit: cover;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+}
+
+.disque{
+    position: relative;
+    display: inline-block;
+    animation: turn 2s infinite linear;
+}
+
+.pause{
+    animation-play-state: paused;
+}
+
+.vinyle {
+    width: 200px;
+}
+
+.div-player {
+    margin-top: 75px;
+    border-radius: 20px;
+}
+
+.player-controls {
+    margin: 30px 10px 10px 10px;
+}
+
+.player-title {
+    margin-top: 30px;
+}
