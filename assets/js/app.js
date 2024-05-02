@@ -15,9 +15,9 @@ const config = {
 };
 
 const getData = async () => {
-    const req = await fetch("./assets/js/data.json");
+    const req = await fetch("https://api-jukebox-18pt.onrender.com/api/v1/music");
     const dbMusics = await req.json();
-    dbMusics.forEach((music) => {
+    dbMusics.result.forEach((music) => {
         playlist.innerHTML += `<li id="${music.id}"><div class="music-info"><h2>${music.title}</h2><p>${music.artist}</p><small><i>${music.category}</i></small></div><img src="${config.urlCover}${music.cover}" alt="${music.title}"/></li>`;
     });
 
