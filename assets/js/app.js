@@ -9,17 +9,19 @@ const btnStop = document.getElementById("btnStop");
 const titleMusic = document.getElementById("titleMusic");
 
 const config = {
+    urlApi: "https://api-jukebox-18pt.onrender.com/api/v1",
+    //urlApi: "http://localhost:3000/api/v1",
     urlCover : "uploads/covers/",
     urlSound : "uploads/musics/",
     defaultCover: "uploads/pictures/vinyle-noir.png"
 };
 
 const getData = async () => {
-    const req = await fetch("https://api-jukebox-18pt.onrender.com/api/v1/music");
+    const req = await fetch(`${config.urlApi}/music`);
     const dbMusics = await req.json();
     const data = dbMusics.result;
     data.forEach((music) => {
-        playlist.innerHTML += `<li id="${music.id}"><div class="music-info"><h2>${music.title}</h2><p>${music.artist}</p><small><i>${music.category}</i></small></div><img src="${config.urlCover}${music.cover}" alt="${music.title}"/></li>`;
+        playlist.innerHTML += `<li id="${music.id}"><div class="music-info"><h2>${music.title}</h2><p>${music.artist}</p><small><i>${music.category}</i></small></div><img src="${config.urlApi}/download/cover/${music.cover}" alt="${music.title}"/></li>`;
     });
 
     const allLi = document.querySelectorAll("li");
@@ -28,8 +30,10 @@ const getData = async () => {
         li.addEventListener('click', function(){
             const id = parseInt(li.id);
             const searchById = data.find((element) => element.id === id);
-            lecteur.src = `${config.urlSound}${searchById.sound}`;
-            disqueCover.src = `${config.urlCover}${searchById.cover}`;
+            //lecteur.src = `${config.urlSound}${searchById.sound}`;
+            //disqueCover.src = `${config.urlCover}${searchById.cover}`;
+            lecteur.src = `${config.urlApi}/download/sound/${searchById.sound}`;
+            disqueCover.src = `${config.urlApi}/download/cover/${searchById.cover}`;
             titleMusic.textContent = `${searchById.title}`;
             lecteur.play();
             sidebar.hide();
@@ -40,12 +44,28 @@ const getData = async () => {
         })
     });
 
-    btnPlayRandom.addEventListener('click', function(){
+    /* btnPlayRandom.addEventListener('click', function(){
         const random = Math.floor(Math.random() * data.length) + 1;
         const searchById = data.find((element) => element.id === random);
         lecteur.src = `${config.urlSound}${searchById.sound}`;
         disqueCover.src = `${config.urlCover}${searchById.cover}`;
         titleMusic.textContent = `${searchById.title}`;
+        lecteur.play();
+        btnPause.classList.remove("disabled");
+        btnPause.innerHTML = `<img class="col-12" src="uploads/pictures/pause.png" alt="pause">`;
+        disque.classList.remove("pause");
+    }); */
+
+    btnPlayRandom.addEventListener('click', async function(){
+        const req = await fetch(`${config.urlApi}/music/random`);
+        const randomRes = await req.json();
+        console.log(randomRes.result);
+        const music = randomRes.result;
+        
+        lecteur.src = `${config.urlApi}/download/sound/${music.sound}`;
+        disqueCover.src = `${config.urlApi}/download/cover/${music.cover}`;
+
+        titleMusic.textContent = `${music.title}`;
         lecteur.play();
         btnPause.classList.remove("disabled");
         btnPause.innerHTML = `<img class="col-12" src="uploads/pictures/pause.png" alt="pause">`;
