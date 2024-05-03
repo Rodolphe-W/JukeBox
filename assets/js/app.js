@@ -59,7 +59,7 @@ const getData = async () => {
     btnPlayRandom.addEventListener('click', async function(){
         const req = await fetch(`${config.urlApi}/music/random`);
         const randomRes = await req.json();
-        console.log(randomRes.result);
+        
         const music = randomRes.result;
         
         lecteur.src = `${config.urlApi}/download/sound/${music.sound}`;
